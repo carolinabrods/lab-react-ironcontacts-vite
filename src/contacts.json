@@ -1,5 +1,13 @@
 [
   {
+    "name": "Ian McKellen",
+    "pictureUrl": "https://image.tmdb.org/t/p/w500/coWjgMEYJjk2OrNddlXCBm8EIr3.jpg",
+    "popularity": 10.070132,
+    "id": "0067ae32-97b6-4431-898e-eb1c10150abb",
+    "wonOscar": false,
+    "wonEmmy": false
+  },
+  {
     "name": "Arnold Schwarzenegger",
     "pictureUrl": "https://image.tmdb.org/t/p/w500/sOkCXc9xuSr6v7mdAq9LwEBje68.jpg",
     "popularity": 18.216362,
@@ -44,14 +52,6 @@
     "pictureUrl": "https://image.tmdb.org/t/p/w500/34kHAyBaBhq2kUrmhM15paEBuuI.jpg",
     "popularity": 10.049256,
     "id": "b497e3c4-50bb-4ae2-912f-eb36802c5bc2",
-    "wonOscar": false,
-    "wonEmmy": false
-  },
-  {
-    "name": "Ian McKellen",
-    "pictureUrl": "https://image.tmdb.org/t/p/w500/coWjgMEYJjk2OrNddlXCBm8EIr3.jpg",
-    "popularity": 10.070132,
-    "id": "0067ae32-97b6-4431-898e-eb1c10150abb",
     "wonOscar": false,
     "wonEmmy": false
   },

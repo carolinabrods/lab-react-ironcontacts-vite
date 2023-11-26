@@ -2,28 +2,41 @@ import { useState } from 'react';
 import contactsData from './contacts.json';
 import './App.css';
 
+// total = 52 contacts
+
 function App() {
   // Iteration 1: Display 5 contacts
-  const firstContacts = contactsData.slice(0, 4);
-  // const remainingContacts
+  const firstContacts = contactsData.slice(0, 5);
   const [contacts, setContacts] = useState(firstContacts);
-  console.log(contacts);
+
+  // create an array with remaining contacts that will also be updated
+  const remainingContacts = contactsData.slice(5);
+  const [remaining, setRemaining] = useState(remainingContacts);
 
   // Iteration 3: Add Random Contacts
-  // to-do: change random picker to get random contacts from the remaining contacts tha are still not showing
   const randomPicker = array => {
-    let min = 5;
+    let min = 0;
     let max = array.length;
     let random = Math.floor(Math.random() * (max - min) + min);
-    return random;
+
+    return array[random]; // should return an object
   };
 
   const addContacts = () => {
-    let newContact = contactsData[randomPicker(contactsData)];
-    console.log(newContact);
+    // create a new contact
+    let newContact = randomPicker(remaining);
+
+    // update the contacts list with new contact
     let updatedContacts = [...contacts, newContact];
 
+    // and remove it from the remaining list
+    const remainingCopy = [...remaining];
+    const newContactIndex = remainingCopy.indexOf(newContact);
+    remainingCopy.splice(newContactIndex, 1);
+
+    // update the state
     setContacts(updatedContacts);
+    setRemaining(remainingCopy);
   };
 
   const didWin = celeb => {
@@ -57,20 +70,55 @@ function App() {
       );
   };
 
+  // Iteration 4: Sort by name
+  const sortByName = () => {
+    const abcOrder = (a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      else return 0;
+    };
+
+    const sortedContactsByName = contacts.sort(abcOrder);
+
+    setContacts([...sortedContactsByName]);
+  };
+
+  // Iteration 4: Sort by popularity
+  const sortByPop = () => {
+    const sortedContactsByPop = contacts.sort(
+      (a, b) => b.popularity - a.popularity
+    );
+    // needs to be created a shallow copy
+    setContacts([...sortedContactsByPop]);
+  };
+
+  // Iteration 5: Delete button
+  const deleteContact = id => {
+    const filteredContacts = contacts.filter(contact => {
+      return id !== contact.id;
+    });
+
+    setContacts(filteredContacts);
+  };
+
   return (
     <div className='App'>
       <h1>IronContacts</h1>
       {/* Iteration 3: Add Random Contact button */}
       <button onClick={addContacts}>Add Random Contact</button>
+      {/* Iteration 4: Sort by Name & Popularity */}
+      <button onClick={sortByName}>Sort by name</button>
+      <button onClick={sortByPop}>Sort by popularity</button>
       <table>
         <tbody>
-          <tr>
+          <tr className='table-header'>
             <th>Picture</th>
             <th>Name</th>
             <th>Popularity</th>
             {/* Iteration 2: Add Oscar and Emmy info */}
             <th>Won an Oscar</th>
             <th>Won an Emmy</th>
+            <th>Actions</th>
           </tr>
           {contacts.map(contact => {
             return (
@@ -84,6 +132,13 @@ function App() {
 
                 {/* Iteration 2: Add Oscar and Emmy info */}
                 {didWin(contact)}
+
+                {/* Iteration 5: Delete button */}
+                <td>
+                  <button onClick={() => deleteContact(contact.id)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}

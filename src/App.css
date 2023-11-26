@@ -44,3 +44,20 @@
 img {
   width: 50px;
 }
+
+h1 {
+  padding: 50px;
+}
+
+table {
+  padding-top: 50px;
+}
+
+.table-header {
+  background-color: beige;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
